@@ -1,31 +1,37 @@
- k= 1000000
-> rN = 0.1 
-> rM = 0.1
-> Nt0 = 1
-> Mt0 = 0
-> timesteps = 500
-> dn=-0.1
-> dm=0.05
-> 
-> Nt <- numeric(length(timesteps))
-> Nt[1] = Nt0
-> Mt <- numeric(length(timesteps))
-> Mt[1] = Mt0
-> 
-> 
-> for(t in 1:(timesteps-1)){
-+   if (t < 300) {
-+   Nt[t+1] <- Nt[t]+rN*Nt[t]*(1-(Nt[t]+Mt[t]/k))
-+   Mt[t+1] <- Mt[t]+rM*Mt[t]*(1-(Nt[t]+Mt[t]/k))
-+   }
-+   else if(t >=300){ Nt[t+1] <- Nt[t]+dn*Nt[t]*(1-(Nt[t]+Mt[t]/k))
-+   Mt[t+1] <- Mt[t]+dm*Mt[t]*(1-(Nt[t]+Mt[t]/k))
-+   }
-+   simdata <- data.frame(time=1:500,Nt,Mt)
-+ 
-+   plot(data=simdata)+
-+   geom_line(aes(x=time,y=N),col='blue',)+
-+   geom_line(aes(x=time,y=M),col='red',)+
-+   theme_classic()
-+  
-+ }
+ N0 = 100
+ M0 = 0.1
+ timesteps = 800
+ dn=(-0.1)
+ dm=0.05
+ 
+ Nt <- numeric(length(timesteps))
+ Nt[1] = N0
+ Mt <- numeric(length(timesteps))
+ Mt[1] = M0
+
+ 
+ for(t in 1:(timesteps-1)){
+   if (t < 150) {
+     Nt[t+1] <- (Nt[t])+rN*(Nt[t])*(1-(Nt[t]+Mt[t])/k)
+     Mt[t+1] <- (Mt[t])+rM*(Mt[t])*(1-(Nt[t]+Mt[t])/k)
+   }
+   else if (t >=150){ 
+     Nt[t+1] <- (Nt[t])+dn*(Nt[t])*(1-(Nt[t]+Mt[t])/k)
+     Mt[t+1] <- (Mt[t])+dm*(Mt[t])*(1-(Nt[t]+Mt[t])/k)
+   }
+ }
+ simdata <- data.frame(time=1:length(Nt),N=Nt,M=Mt)
+ 
+ library(ggplot2)
+ ggplot(data=simdata)+
+   geom_line(aes(x=time,y=Nt),col='blue',)+
+   geom_line(aes(x=time,y=Mt),col='red',)+
+   theme_classic()
+ 
+   
+
+ 
+ 
+ 
+ 
+ 
