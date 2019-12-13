@@ -1,3 +1,4 @@
+ ##parameter
  N0 = 100
  M0 = 0.1
  timesteps = 800
@@ -9,7 +10,7 @@
  Mt <- numeric(length(timesteps))
  Mt[1] = M0
 
- 
+ #creat vector
  for(t in 1:(timesteps-1)){
    if (t < 150) {
      Nt[t+1] <- (Nt[t])+rN*(Nt[t])*(1-(Nt[t]+Mt[t])/k)
@@ -21,6 +22,8 @@
    }
  }
  simdata <- data.frame(time=1:length(Nt),N=Nt,M=Mt)
+ 
+ #stimulate growth factor
  
  library(ggplot2)
  ggplot(data=simdata)+
